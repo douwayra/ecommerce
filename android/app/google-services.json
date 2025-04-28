@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "693114114201",
+    "project_id": "boutiqueflutter-b5974",
+    "storage_bucket": "boutiqueflutter-b5974.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693114114201:android:c40e1b2470ab9bff1ae808",
+        "android_client_info": {
+          "package_name": "com.supdeco.ecom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcwQWIqK5zWmKtRx8QIRloJQRBn_OVr7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
