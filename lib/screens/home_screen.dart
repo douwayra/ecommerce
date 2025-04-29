@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../data/dummy_products.dart';
+import '../services/firestore_service.dart';
 import '../widgets/product_card.dart';
+import '../models/product.dart';
 import 'cart_screen.dart';
+import 'add_product_screen.dart'; // Ajoute cette ligne
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,22 +12,43 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Boutique'),
+        title: const Text('Boutique Flutter'),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => CartScreen()),
+                MaterialPageRoute(builder: (_) => const AddProductScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CartScreen()),
               );
             },
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: dummyProducts.length,
-        itemBuilder: (ctx, i) => ProductCard(product: dummyProducts[i]),
+      body: StreamBuilder<List<Product>>(
+        stream: FirestoreService().getProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(child: Text('Erreur de chargement'));
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final products = snapshot.data!;
+          return ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (ctx, i) => ProductCard(product: products[i]),
+          );
+        },
       ),
     );
   }

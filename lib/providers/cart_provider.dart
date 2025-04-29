@@ -6,20 +6,22 @@ class CartProvider with ChangeNotifier {
 
   List<Product> get items => _items;
 
-  double get total => _items.fold(0, (sum, item) => sum + item.price);
-
-  void add(Product product) {
+  void addToCart(Product product) {
     _items.add(product);
     notifyListeners();
   }
 
-  void remove(Product product) {
+  void removeFromCart(Product product) {
     _items.remove(product);
     notifyListeners();
   }
 
-  void clear() {
+  void clearCart() {
     _items.clear();
     notifyListeners();
+  }
+
+  double get totalPrice {
+    return _items.fold(0, (sum, item) => sum + item.price);
   }
 }

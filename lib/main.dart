@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'providers/cart_provider.dart';
 import 'screens/home_screen.dart';
+import 'providers/cart_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // 👈 Initialise Firebase
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => CartProvider(),
-      child: const MyApp(),
-    ),
-  );
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,11 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Boutique Flutter',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomeScreen(),
+    return ChangeNotifierProvider(
+      create: (_) => CartProvider(),
+      child: MaterialApp(
+        title: 'Ma boutique',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const HomeScreen(),
+      ),
     );
   }
 }

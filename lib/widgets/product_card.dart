@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/product.dart';
-import '../screens/product_detail_screen.dart';
+import '../providers/cart_provider.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -14,22 +15,15 @@ class ProductCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => ProductDetailScreen(product: product),
-            ),
-          );
-        },
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  product.image, // 🔁 correction ici
+                child: Image.network(
+                  product.image,
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
@@ -54,7 +48,16 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios, size: 16)
+              IconButton(
+                icon: const Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  Provider.of<CartProvider>(context, listen: false)
+                      .addToCart(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Ajouté au panier')),
+                  );
+                },
+              )
             ],
           ),
         ),
