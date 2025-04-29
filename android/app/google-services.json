@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:693114114201:android:6fe2668bf48633a51ae808",
+        "android_client_info": {
+          "package_name": "com.example.boutique_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcwQWIqK5zWmKtRx8QIRloJQRBn_OVr7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:693114114201:android:c40e1b2470ab9bff1ae808",
         "android_client_info": {
           "package_name": "com.supdeco.ecom"

@@ -30,11 +30,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
           image: _imageController.text.trim(),
           description: _descriptionController.text.trim(),
         );
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Produit ajouté !')),
         );
         Navigator.pop(context);
       } catch (e) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erreur : $e')),
         );
